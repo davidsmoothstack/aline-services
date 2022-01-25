@@ -1,0 +1,49 @@
+version: "3.7"
+
+volumes:
+  aline-mysql-data:
+
+networks:
+  default:
+    name: aline-network
+
+services:
+  user:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-user-microservice
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=8070
+    ports:
+      - 8070:8070
+
+  bank:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-bank-microservice
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=8083
+    ports:
+      - 8083:8083
+
+  transaction:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-transaction-microservice
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=8073
+    ports:
+      - 8073:8073
+
+  underwriter:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-underwriter-microservice
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=8071
+    ports:
+      - 8071:8071
