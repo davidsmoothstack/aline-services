@@ -7,9 +7,9 @@ services:
     env_file:
       - .env
     environment:
-      - APP_PORT=8070
+      - APP_PORT=${USER_PORT}
     ports:
-      - 8070:8070
+      - ${USER_PORT}:${USER_PORT}
 
   bank:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-bank-microservice:ae84f31
@@ -17,9 +17,9 @@ services:
     env_file:
       - .env
     environment:
-      - APP_PORT=8083
+      - APP_PORT=${BANK_PORT}
     ports:
-      - 8083:8083
+      - ${BANK_PORT}:${BANK_PORT}
 
   transaction:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-transaction-microservice:054e2a0
@@ -27,9 +27,9 @@ services:
     env_file:
       - .env
     environment:
-      - APP_PORT=8073
+      - APP_PORT=${TRANSACTION_PORT}
     ports:
-      - 8073:8073
+      - ${TRANSACTION_PORT}:${TRANSACTION_PORT}
 
   underwriter:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-underwriter-microservice:baad1dc
@@ -37,6 +37,6 @@ services:
     env_file:
       - .env
     environment:
-      - APP_PORT=8071
+      - APP_PORT=${UNDERWRITER_PORT}
     ports:
-      - 8071:8071
+      - ${UNDERWRITER_PORT}:${UNDERWRITER_PORT}
