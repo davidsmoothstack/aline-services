@@ -1,12 +1,5 @@
 version: "3.7"
 
-volumes:
-  aline-mysql-data:
-
-networks:
-  default:
-    name: aline-network
-
 services:
   user:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-user-microservice:01348ed
@@ -29,7 +22,7 @@ services:
       - 8083:8083
 
   transaction:
-    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-transaction-microservic:054e2a0
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-transaction-microservice:054e2a0
     restart: unless-stopped
     env_file:
       - .env
