@@ -3,7 +3,6 @@ version: "3.7"
 services:
   user:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-user-microservice:01348ed
-    restart: unless-stopped
     env_file:
       - .env
     environment:
@@ -13,7 +12,6 @@ services:
 
   bank:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-bank-microservice:ae84f31
-    restart: unless-stopped
     env_file:
       - .env
     environment:
@@ -23,7 +21,6 @@ services:
 
   transaction:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-transaction-microservice:054e2a0
-    restart: unless-stopped
     env_file:
       - .env
     environment:
@@ -33,7 +30,6 @@ services:
 
   underwriter:
     image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/dw-underwriter-microservice:baad1dc
-    restart: unless-stopped
     env_file:
       - .env
     environment:
