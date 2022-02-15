@@ -27,5 +27,5 @@ fargateProfiles:
 
 cloudWatch:
   clusterLogging:
-    enableTypes: all
+    enableTypes: ["*"]
     logRetentionInDays: 60
