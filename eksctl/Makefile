@@ -1,7 +1,7 @@
 region=us-east-2
 policyName=AWSLoadBalancerControllerIAMPolicy
 policyDocument=iam_policy.json
-clusterName=dw-eks-cluster
+clusterName=dw-eks
 serviceAccountName=aws-load-balancer-controller
 accountId=862167864120
 publicNgName=Public
@@ -15,7 +15,9 @@ create_cluster:
 		--region ${region} \
 		--full-ecr-access \
 		--alb-ingress-access \
-		--without-nodegroup
+		--without-nodegroup \
+		--vpc-cidr "10.1.0.0/16" \
+		--vpc-nat-mode Single
 
 set_context:
 	eksctl utils write-kubeconfig \
@@ -46,17 +48,17 @@ create_node_group:
 		--alb-ingress-access
 
 clean:
-	eksctl delete nodegroup \
-		--region ${region} \
-		--name ${publicNgName}
-		--approve
-	
-	eksctl delete nodegroup \
-		--region ${region} \
-		--name ${privateNgName}
-		--approve
+# eksctl delete nodegroup \
+# 	--cluster ${clusterName} \
+# 	--region ${region} \
+# 	--name ${publicNgName} \
+
+# eksctl delete nodegroup \
+# 	--cluster ${clusterName} \
+# 	--region ${region} \
+# 	--name ${privateNgName} \
 
 	eksctl delete cluster \
-		--name ${clusterName}
-		--region ${region}
+		--name ${clusterName} \
+		--region ${region} \
 		--force
