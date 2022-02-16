@@ -8,8 +8,11 @@ publicNgName=public-ng
 privateNgName=private-ng
 fargateProfileName=fargate
 fargateNamespace=microservice
+vpcId=vpc-047f6fab365f6f952
 
 init: create_cluster create_node_group create_fargate_profile set_context
+lbInit: create_iam_policy
+lbInstall: set_context create_service_account apply_load_balancer
 
 create_cluster:
 	eksctl create cluster \
@@ -64,3 +67,30 @@ clean:
 		--name ${clusterName} \
 		--region ${region} \
 		--force
+
+create_iam_policy:
+	aws iam create-policy \
+		--policy-name ${policyName} \
+		--policy-document file://iam_policy.json
+
+create_service_account:
+	eksctl utils associate-iam-oidc-provider \
+		--region=${region} \
+		--cluster=${clusterName} \
+		--approve
+
+	eksctl create iamserviceaccount \
+		--cluster=${clusterName} \
+		--region=${region} \
+		--namespace=kube-system \
+		--name=${serviceAccountName} \
+		--attach-policy-arn=arn:aws:iam::${accountId}:policy/${policyName} \
+		--override-existing-serviceaccounts \
+		--approve
+
+apply_load_balancer:
+	helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+		-n kube-system \
+		--set clusterName=${clusterName} \
+		--set serviceAccount.create=false \
+		--set serviceAccount.name=${serviceAccountName}
