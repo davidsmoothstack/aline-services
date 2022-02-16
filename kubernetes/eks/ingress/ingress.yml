@@ -41,13 +41,13 @@ spec:
               service:
                 name: user-service
                 port:
-                  number: 8071
+                  number: 8070
 
           - path: /applicants
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: underwriter-service
                 port:
                   number: 8071
 
@@ -55,7 +55,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: underwriter-service
                 port:
                   number: 8071
 
@@ -65,4 +65,4 @@ spec:
               service:
                 name: transaction-service
                 port:
-                  number: 8070
+                  number: 8073
