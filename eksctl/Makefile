@@ -4,8 +4,8 @@ policyDocument=iam_policy.json
 clusterName=dw-eks
 serviceAccountName=aws-load-balancer-controller
 accountId=862167864120
-publicNgName=Public
-privateNgName=Private
+publicNgName=public-ng
+privateNgName=private-ng
 fargateProfileName=fargate-default
 fargateNamespace=microservice
 
