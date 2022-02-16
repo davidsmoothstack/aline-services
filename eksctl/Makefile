@@ -1,7 +1,7 @@
 region=us-east-2
 policyName=AWSLoadBalancerControllerIAMPolicy
 policyDocument=iam_policy.json
-clusterName=dw-eks
+clusterName=dw-eks-A
 serviceAccountName=aws-load-balancer-controller
 accountId=862167864120
 publicNgName=public-ng
@@ -21,7 +21,7 @@ create_cluster:
 		--full-ecr-access \
 		--alb-ingress-access \
 		--without-nodegroup \
-		--vpc-nat-mode Single \
+		--vpc-nat-mode Single
 		--set-kubeconfig-context false
 
 set_context:
@@ -33,17 +33,6 @@ set_context:
 create_node_group:
 	eksctl create nodegroup \
 		--name ${publicNgName} \
-		--cluster ${clusterName} \
-		--region ${region} \
-		--node-type t2.small \
-		--nodes-min 1 \
-		--nodes-max 2 \
-		--full-ecr-access \
-		--alb-ingress-access
-
-	eksctl create nodegroup \
-		--name ${privateNgName} \
-		--node-private-networking \
 		--cluster ${clusterName} \
 		--region ${region} \
 		--node-type t2.small \
