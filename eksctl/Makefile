@@ -52,8 +52,8 @@ create_fargate_profile:
 	eksctl create fargateprofile \
 		--cluster ${clusterName} \
 		--region ${region} \
-		--name ${fargateProfileName}
-		--namespace ${faregateNamespace}
+		--name ${fargateProfileName} \
+		--namespace ${fargateNamespace}
 
 clean:
 	eksctl delete cluster \
