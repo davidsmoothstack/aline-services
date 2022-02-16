@@ -6,8 +6,8 @@ serviceAccountName=aws-load-balancer-controller
 accountId=862167864120
 publicNgName=public-ng
 privateNgName=private-ng
-fargateProfileName=fargate-default
-fargateNamespace=microservice
+fargateProfileName=fargate
+fargateNamespace=default
 
 init: create_cluster create_node_group create_fargate_profile set_context
 
@@ -56,6 +56,10 @@ create_fargate_profile:
 		--namespace ${fargateNamespace}
 
 clean:
+	eksctl delete fargateprofile \
+		--cluster ${clusterName} \
+		--region ${region}
+
 	eksctl delete cluster \
 		--name ${clusterName} \
 		--region ${region} \
