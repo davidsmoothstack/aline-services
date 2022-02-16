@@ -1,7 +1,7 @@
 region=us-east-2
 policyName=AWSLoadBalancerControllerIAMPolicy
 policyDocument=iam_policy.json
-clusterName=dw-eks
+clusterName=dw-eks-2
 serviceAccountName=aws-load-balancer-controller
 accountId=862167864120
 publicNgName=public-ng
@@ -10,7 +10,7 @@ fargateProfileName=fargate
 fargateNamespace=microservice
 vpcId=vpc-047f6fab365f6f952
 
-init: create_cluster create_node_group create_fargate_profile set_context
+init: create_cluster create_node_group create_fargate_profile
 lbInit: create_iam_policy
 lbInstall: set_context create_service_account apply_load_balancer
 
@@ -59,10 +59,6 @@ create_fargate_profile:
 		--namespace ${fargateNamespace}
 
 clean:
-	eksctl delete fargateprofile \
-		--cluster ${clusterName} \
-		--region ${region}
-
 	eksctl delete cluster \
 		--name ${clusterName} \
 		--region ${region} \
