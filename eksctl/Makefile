@@ -9,7 +9,7 @@ privateNgName=Private
 fargateProfileName=fargate-default
 fargateNamespace=microservice
 
-init: create_cluster create_node_group create_fargate_profile
+init: create_cluster create_node_group create_fargate_profile set_context
 
 create_cluster:
 	eksctl create cluster \
