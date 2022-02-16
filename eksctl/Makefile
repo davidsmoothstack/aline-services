@@ -7,7 +7,7 @@ accountId=862167864120
 publicNgName=public-ng
 privateNgName=private-ng
 fargateProfileName=fargate
-fargateNamespace=default
+fargateNamespace=microservice
 
 init: create_cluster create_node_group create_fargate_profile set_context
 
